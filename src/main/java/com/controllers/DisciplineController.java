@@ -24,7 +24,6 @@ public class DisciplineController {
 	DisciplineDetailsImpl disciplineDetailsImpl;
 		
 	@GetMapping("/all")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<List<Discipline>> find() {		
 		return new ResponseEntity<>(disciplineDetailsImpl.findAll(), HttpStatus.OK);
 	}
