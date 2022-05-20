@@ -1,7 +1,5 @@
 package com.models;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,10 +30,14 @@ public class Schedules {
 	@NotBlank
 	@Size(max = 20)
 	private String dayWeek;
-		
-	private Date initialDate;
 	
-	private Date finalDate;
+	@NotBlank
+	@Size(max = 5)
+	private Integer initialDate;
+	
+	@NotBlank
+	@Size(max = 5)
+	private Integer finalDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Teachers teachers;
