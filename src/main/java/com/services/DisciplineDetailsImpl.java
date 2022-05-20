@@ -26,10 +26,9 @@ public class DisciplineDetailsImpl  {
 			List<Discipline> cleanList = new ArrayList<Discipline>();
 			
 			for (Discipline discipline : disciplines) {
-				if (discipline.getTeachers() == null) {
+				if (discipline.getFlagStandard() != null) {
 					cleanList.add(discipline);					
-				}
-				
+				} 				
 			} 			
 			return cleanList;
 		} catch (Exception e) {

@@ -3,9 +3,11 @@ package com.models;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -34,4 +36,7 @@ public class Schedules {
 	private Date initialDate;
 	
 	private Date finalDate;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Teachers teachers;
 }

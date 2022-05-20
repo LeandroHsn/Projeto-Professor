@@ -55,10 +55,10 @@ public class Teachers {
 	private String description;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="schedules_id")
+	@JoinColumn(name="teacher_id")
 	private List<Schedules> schedules;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="discipline_id")
+	@JoinColumn(name="teacher_id")
 	private List<Discipline> discipline;
 }

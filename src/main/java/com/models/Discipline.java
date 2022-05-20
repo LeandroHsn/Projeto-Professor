@@ -31,6 +31,8 @@ public class Discipline {
 	@Size(max = 20)
 	private String discipline;
 	
+	private Integer flagStandard;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Teachers teachers;
 }
