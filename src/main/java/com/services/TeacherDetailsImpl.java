@@ -1,5 +1,7 @@
 package com.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 
@@ -68,6 +70,16 @@ public class TeacherDetailsImpl  {
 		if (dto.getDisciplines() == null) {
 			throw new ValidationException("Disciplina inválido.");
 		}
+	}
+	
+	@Transactional
+	public List<Teachers> findAll() {		
+		try {			
+			List<Teachers> teachers = teacherRepository.findAll();
+			return teachers;
+		} catch (Exception e) {
+			throw new ValidationException("Erro: " + e.getMessage());
+		}				
 	}
 
 }
