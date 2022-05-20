@@ -32,12 +32,12 @@ public class Schedules {
 	private String dayWeek;
 	
 	@NotBlank
-	@Size(max = 5)
-	private Integer initialDate;
+	@Size(max = 6)
+	private String initialDate;
 	
 	@NotBlank
-	@Size(max = 5)
-	private Integer finalDate;
+	@Size(max = 6)
+	private String finalDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Teachers teachers;
