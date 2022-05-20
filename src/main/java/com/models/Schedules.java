@@ -31,9 +31,7 @@ public class Schedules {
 	@Size(max = 20)
 	private String dayWeek;
 		
-	@NotBlank
 	private Date initialDate;
 	
-	@NotBlank
 	private Date finalDate;
 }
