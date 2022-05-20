@@ -54,6 +54,10 @@ public class Teachers {
 	@Size(max = 500)
 	private String description;
 	
+	@NotBlank
+	@Size(max = 200)
+	private String linkPhoto;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="teacher_id")
 	private List<Schedules> schedules;
