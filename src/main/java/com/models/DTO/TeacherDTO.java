@@ -21,6 +21,7 @@ public class TeacherDTO {
 	private String cpfOrCnpj;
 	private String email;
 	private String whatsApp;
+	private String linkPhoto;
 	private String description;
 	private List<Schedules> schedules; 
 	private List<Discipline> disciplines;

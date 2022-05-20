@@ -29,6 +29,7 @@ public class TeacherDetailsImpl  {
 						.cpfOrCnpj(dto.getCpfOrCnpj())
 						.email(dto.getEmail())
 						.whatsApp(dto.getWhatsApp())
+						.linkPhoto(dto.getLinkPhoto())
 						.schedules(dto.getSchedules())
 						.description(dto.getDescription())
 						.discipline(dto.getDisciplines())
@@ -69,6 +70,12 @@ public class TeacherDetailsImpl  {
 		}
 		if (dto.getDisciplines() == null) {
 			throw new ValidationException("Disciplina inválido.");
+		}
+		if (dto.getDisciplines() == null) {
+			throw new ValidationException("Disciplina inválido.");
+		}
+		if (dto.getLinkPhoto() == null) {
+			throw new ValidationException("Link da foto inválido.");
 		}
 	}
 	
