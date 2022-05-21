@@ -51,11 +51,11 @@ public class Teachers {
 	private String whatsApp;
 	
 	@NotBlank
-	@Size(max = 500)
+	@Size(max = 600)
 	private String description;
 	
 	@NotBlank
-	@Size(max = 200)
+	@Size(max = 500)
 	private String linkPhoto;
 	
 	@OneToMany(cascade = CascadeType.ALL)
