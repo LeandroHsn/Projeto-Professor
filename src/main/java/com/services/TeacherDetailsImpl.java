@@ -47,36 +47,53 @@ public class TeacherDetailsImpl  {
 
 	private void validateTeacher(TeacherDTO dto) {
 		
-		if (dto.getCpfOrCnpj() == null) {
-			throw new ValidationException("CPF ou CNPJ inválido.");
-		}
-		if (dto.getDescription() == null) {
-			throw new ValidationException("Descrição inválida.");
-		}
-		if (dto.getEmail() == null) {
-			throw new ValidationException("E-mail inválido.");
-		}
-		if (dto.getFullName() == null) {
-			throw new ValidationException("Nome inválido.");
-		}
-		if (dto.getHourCost() == null) {
-			throw new ValidationException("Custo por hora inválido.");
-		}
-		if (dto.getSchedules() == null) {
-			throw new ValidationException("Horários inválido.");
-		}
-		if (dto.getWhatsApp() == null) {
-			throw new ValidationException("WhatsApp inválido.");
-		}
-		if (dto.getDisciplines() == null) {
-			throw new ValidationException("Disciplina inválido.");
-		}
-		if (dto.getDisciplines() == null) {
-			throw new ValidationException("Disciplina inválido.");
-		}
-		if (dto.getLinkPhoto() == null) {
-			throw new ValidationException("Link da foto inválido.");
-		}
+		try {			
+			if (dto.getCpfOrCnpj() == null) {
+				throw new ValidationException("CPF ou CNPJ inválido.");
+			}
+			
+			if (dto.getCpfOrCnpj() != null) {
+				List<Teachers> teachers = teacherRepository.findAll();
+				
+				for (Teachers teacher : teachers) {
+					if (teacher.getCpfOrCnpj().equalsIgnoreCase(dto.getCpfOrCnpj())) {
+						throw new ValidationException("CPF/CNPJ registrado, edite seus dados ou utilize outro CPF/CNPJ.");
+					}
+				}			
+			
+			}
+			
+			if (dto.getDescription() == null) {
+				throw new ValidationException("Descrição inválida.");
+			}
+			if (dto.getEmail() == null) {
+				throw new ValidationException("E-mail inválido.");
+			}
+			if (dto.getFullName() == null) {
+				throw new ValidationException("Nome inválido.");
+			}
+			if (dto.getHourCost() == null) {
+				throw new ValidationException("Custo por hora inválido.");
+			}
+			if (dto.getSchedules() == null) {
+				throw new ValidationException("Horários inválido.");
+			}
+			if (dto.getWhatsApp() == null) {
+				throw new ValidationException("WhatsApp inválido.");
+			}
+			if (dto.getDisciplines() == null) {
+				throw new ValidationException("Disciplina inválido.");
+			}
+			if (dto.getDisciplines() == null) {
+				throw new ValidationException("Disciplina inválido.");
+			}
+			if (dto.getLinkPhoto() == null) {
+				throw new ValidationException("Link da foto inválido.");
+			}
+		} catch (Exception e) {
+			throw new ValidationException("Erro: " + e.getMessage());
+		}	
+
 	}
 	
 	@Transactional
