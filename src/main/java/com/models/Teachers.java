@@ -35,7 +35,7 @@ public class Teachers {
 	private String hourCost;
 	
 	@NotBlank
-	@Size(max = 100)
+	@Size(max = 150)
 	private String fullName;
 	
 	@NotBlank
