@@ -55,7 +55,7 @@ public class Teachers {
 	private String description;
 	
 	@NotBlank
-	@Size(max = 500)
+	@Size(max = 600)
 	private String linkPhoto;
 	
 	@OneToMany(cascade = CascadeType.ALL)
