@@ -53,9 +53,8 @@ public class TeacherDetailsImpl  {
 			}
 			
 			if (dto.getCpfOrCnpj() != null) {
-				List<Teachers> teachers = teacherRepository.findAll();
-				
-				for (Teachers teacher : teachers) {
+				List<Teachers> teachers = teacherRepository.findAll(); //Ajuste temporário pois o JPA não está funcionando				
+				for (Teachers teacher : teachers) { 
 					if (teacher.getCpfOrCnpj().equalsIgnoreCase(dto.getCpfOrCnpj())) {
 						throw new ValidationException("CPF/CNPJ registrado, edite seus dados ou utilize outro CPF/CNPJ.");
 					}
