@@ -11,30 +11,24 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger2
-public class SwaggerConfig extends WebMvcConfigurationSupport {
+@Configuration
+public class SpringFoxConfig {                                    
     @Bean
-    public Docket productApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("guru.springframework.controllers"))
-                .build()
-                .apiInfo(metaData());
+    public Docket api() { 
+        return new Docket(DocumentationType.SWAGGER_2)  
+          .select()                                  
+          .apis(RequestHandlerSelectors.any())              
+          .paths(PathSelectors.any())                          
+          .build();                                           
     }
-    private ApiInfo metaData() {
-        return new ApiInfoBuilder()
-                .title("Spring Boot REST API")
-                .description("\"Spring Boot REST API\"")
-                .version("1.0.0")
-                .license("Apache License Version 2.0")  
-                .build();
-    }
+        
     @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
+          .addResourceLocations("classpath:/META-INF/resources/");
 
         registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+          .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
+
 }
