@@ -70,7 +70,4 @@ public class Teachers {
 	
 	private Integer approved;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Panel panel;
-
 }
