@@ -30,25 +30,26 @@ public class PanelDetailsImpl  {
 	}
 
 	public Panel approve(Long id) {
-		try {			
+		try {
+			
 			if(id == null) {
 				throw new ValidationException("ID não encontrado" );
 			}
 			
 			Optional<Panel> optional = panelRepository.findById(id);
 			
-			if(!optional.isEmpty()) {
-				
-				Panel panel = optional.get();
-				
-				panel.setTeacherApproved(1);
-				for (Teachers teacher: panel.getTeachers()) {
-					teacher.setApproved(1);
-				}
-				return panelRepository.save(panel);
-			} else {
+			if(optional.isEmpty()) {
 				throw new ValidationException("ID não encontrado" );
+			} 		
+			
+			Panel panel = optional.get();
+			
+			panel.setTeacherApproved(1);
+			for (Teachers teacher: panel.getTeachers()) {
+				teacher.setApproved(1);
 			}
+			
+			return panelRepository.save(panel);
 			
 		} catch (Exception e) {
 			throw new ValidationException("Erro: " + e.getMessage());
@@ -64,18 +65,18 @@ public class PanelDetailsImpl  {
 			
 			Optional<Panel> optional = panelRepository.findById(id);
 			
-			if(!optional.isEmpty()) {
-				
-				Panel panel = optional.get();
-				
-				panel.setTeacherApproved(0);
-				for (Teachers teacher: panel.getTeachers()) {
-					teacher.setApproved(0);
-				}
-				return panelRepository.save(panel);
-			} else {
+			if(optional.isEmpty()) {
 				throw new ValidationException("ID não encontrado" );
+			} 
+			
+			Panel panel = optional.get();
+			
+			panel.setTeacherApproved(0);
+			for (Teachers teacher: panel.getTeachers()) {
+				teacher.setApproved(0);
 			}
+			
+			return panelRepository.save(panel);
 			
 		} catch (Exception e) {
 			throw new ValidationException("Erro: " + e.getMessage());
