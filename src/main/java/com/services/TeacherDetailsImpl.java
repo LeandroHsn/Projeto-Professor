@@ -1,5 +1,6 @@
 package com.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,8 +9,10 @@ import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.models.Panel;
 import com.models.Teachers;
 import com.models.DTO.TeacherDTO;
+import com.repository.PanelRepository;
 import com.repository.TeacherRepository;
 
 @Service
@@ -17,6 +20,10 @@ public class TeacherDetailsImpl  {
 	
 	 @Autowired()
 	 TeacherRepository teacherRepository;
+	 
+	 @Autowired()
+	 PanelRepository panelRepository;
+
 
 	 @Transactional
 	 public Teachers save(TeacherDTO dto) {
@@ -33,9 +40,19 @@ public class TeacherDetailsImpl  {
 						.schedules(dto.getSchedules())
 						.description(dto.getDescription())
 						.discipline(dto.getDisciplines())
+						.approved(0)
+						.build();
+				
+				List<Teachers> teachers = new ArrayList<>();
+				teachers.add(teacher);
+				
+				Panel panel = Panel.builder()
+						.teachers(teachers)
+						.teacherApproved(0)
 						.build();
 				
 				teacherRepository.save(teacher);
+				panelRepository.save(panel);
 				
 				return new Teachers();
 				
