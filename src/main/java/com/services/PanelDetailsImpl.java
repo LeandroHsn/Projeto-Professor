@@ -38,7 +38,7 @@ public class PanelDetailsImpl  {
 			
 			Optional<Panel> optional = panelRepository.findById(id);
 			
-			if(optional.isEmpty()) {
+			if(!optional.isPresent()) {
 				throw new ValidationException("ID não encontrado" );
 			} 		
 			
@@ -65,7 +65,7 @@ public class PanelDetailsImpl  {
 			
 			Optional<Panel> optional = panelRepository.findById(id);
 			
-			if(optional.isEmpty()) {
+			if(!optional.isPresent()) {
 				throw new ValidationException("ID não encontrado" );
 			} 
 			
