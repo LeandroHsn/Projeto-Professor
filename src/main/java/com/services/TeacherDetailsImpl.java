@@ -2,6 +2,7 @@ package com.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
@@ -40,6 +41,7 @@ public class TeacherDetailsImpl  {
 						.schedules(dto.getSchedules())
 						.description(dto.getDescription())
 						.discipline(dto.getDisciplines())
+						.stars(0)
 						.approved(0)
 						.build();
 				
@@ -110,6 +112,30 @@ public class TeacherDetailsImpl  {
 			throw new ValidationException("Erro: " + e.getMessage());
 		}	
 
+	}
+	
+	public Teachers updateStar(Long id, Integer stars) {
+		try {
+			
+			if(id == null) {
+				throw new ValidationException("ID não encontrado" );
+			}
+			
+			Optional<Teachers> optional = teacherRepository.findById(id);
+			
+			if(!optional.isPresent()) {
+				throw new ValidationException("ID não encontrado" );
+			} 		
+			
+			Teachers teacher = optional.get();
+			
+			teacher.setStars(stars);
+			return teacherRepository.save(teacher);
+			
+		} catch (Exception e) {
+			throw new ValidationException("Erro: " + e.getMessage());
+		}				
+		
 	}
 	
 	@Transactional

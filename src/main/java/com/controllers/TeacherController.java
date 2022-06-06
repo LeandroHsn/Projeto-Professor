@@ -7,9 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.models.Teachers;
@@ -32,5 +35,12 @@ public class TeacherController {
 	@GetMapping("/all")
 	public ResponseEntity<List<Teachers>> find() {		
 		return new ResponseEntity<>(teacherDetailsImpl.findAll(), HttpStatus.OK);
+	}
+	
+	@PutMapping("/star/{id}")
+	public ResponseEntity<Teachers> star (@PathVariable("id") Long id,
+			@RequestParam ("stars") Integer stars) {		
+		return new ResponseEntity<>(teacherDetailsImpl.updateStar(id, stars), HttpStatus.OK);
+		
 	}
 }

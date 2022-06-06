@@ -25,7 +25,7 @@ public class TeacherDTO {
 	private String description;
 	private List<Schedules> schedules; 
 	private List<Discipline> disciplines;
-	
+		
 }
 
 
