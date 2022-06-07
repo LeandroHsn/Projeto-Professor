@@ -36,6 +36,9 @@ import com.services.UserDetailsImpl;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+	/**
+	 * Responsavel por criar, validar e definir o nível de acesso dos usuários.
+	 */
 	@Autowired
 	AuthenticationManager authenticationManager;
 
@@ -51,6 +54,11 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
+	/**
+	 * Método responsável por autenticar o usuário. 
+	 * @param loginRequest
+	 * @return
+	 */
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -71,6 +79,12 @@ public class AuthController {
 												 userDetails.getEmail(), 
 												 roles));
 	}
+	
+	/**
+	 * Método responsável por realizar o logOff do usuário.
+	 * @param signUpRequest
+	 * @return
+	 */
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {

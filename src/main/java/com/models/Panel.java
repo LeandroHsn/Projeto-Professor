@@ -23,7 +23,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(	name = "panel")
 public class Panel {
-	
+	/**
+	 * Realiza a associação na tabela com a tabela tb_teachers.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

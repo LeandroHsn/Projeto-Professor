@@ -23,9 +23,16 @@ import com.services.TeacherDetailsImpl;
 @RestController
 @RequestMapping("/api/teacher")
 public class TeacherController {
-
+/**
+ * Define as rotas da classe Teachers.
+ */
 	@Autowired
 	TeacherDetailsImpl teacherDetailsImpl;
+	/**
+	 * Define as rotas para salvar e buscar professores. 
+	 * @param teacherDTO
+	 * @return 
+	 */
 	
 	@PostMapping("/save")
 	public ResponseEntity<Teachers> save(@RequestBody TeacherDTO teacherDTO) {		
@@ -37,6 +44,12 @@ public class TeacherController {
 		return new ResponseEntity<>(teacherDetailsImpl.findAll(), HttpStatus.OK);
 	}
 	
+	/**
+	 * Verifica a qualificação do professor pela quantidade de estrelas.
+	 * @param id
+	 * @param stars
+	 * @return Quantidade de estrelas
+	 */
 	@PutMapping("/star/{id}")
 	public ResponseEntity<Teachers> star (@PathVariable("id") Long id,
 			@RequestParam ("stars") Integer stars) {		

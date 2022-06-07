@@ -25,7 +25,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(	name = "teachers")
 public class Teachers {
-	
+	/**
+	 *  Persiste a classe Teachers no banco de dados.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

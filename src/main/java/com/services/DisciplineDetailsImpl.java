@@ -18,6 +18,10 @@ public class DisciplineDetailsImpl  {
 	@Autowired()
 	DisciplineRepository disciplineRepository;
 	
+	/**
+	 * Retorna a lista de disciplinas.
+	 * @return Uma lista de objetos Discipline.
+	 */
 	@Transactional
 	public List<Discipline> findAll() {
 		

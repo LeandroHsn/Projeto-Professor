@@ -24,6 +24,10 @@ import lombok.NoArgsConstructor;
 			@UniqueConstraint(columnNames = "email") 
 		})
 public class User {
+	/**
+	 *  Persiste a classe User no banco de dados.
+	 */
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

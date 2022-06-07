@@ -18,7 +18,7 @@ public class PanelDetailsImpl  {
 	
 	 @Autowired()
 	 PanelRepository  panelRepository;
-	
+
 	@Transactional
 	public List<Panel> findAll() {		
 		try {			

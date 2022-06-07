@@ -22,7 +22,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(	name = "schedules")
 public class Schedules {
-	
+	/**
+	 *  Persiste a classe Schedules no banco de dados.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

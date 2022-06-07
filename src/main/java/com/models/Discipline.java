@@ -16,6 +16,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+
 @Builder
 @Entity
 @Data
@@ -23,8 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(	name = "discipline")
 public class Discipline {
+	/**
+	 * Persiste a classe discipline no banco de dados.
+	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 
 	@NotBlank

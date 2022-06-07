@@ -20,7 +20,10 @@ public class DisciplineController {
 
 	@Autowired
 	DisciplineDetailsImpl disciplineDetailsImpl;
-		
+	/**
+	 * Define a rota para buscar todas as disciplinas.
+	 * @return Lista de Disciplines
+	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<Discipline>> find() {		
 		return new ResponseEntity<>(disciplineDetailsImpl.findAll(), HttpStatus.OK);

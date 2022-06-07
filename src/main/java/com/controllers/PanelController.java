@@ -20,9 +20,14 @@ import com.services.PanelDetailsImpl;
 @RequestMapping("/api/panel")
 public class PanelController {
 
+
 	@Autowired
 	PanelDetailsImpl  panelDetailsImpl;
-	
+	/**
+	 * Define as rotas de verificação (se aprovado ou não).
+	 * @param id
+	 * @return Usuário aprovado ou não.
+	 */
 	@PutMapping("/approve/{id}")
 	public ResponseEntity<Panel> approve (@PathVariable("id") Long  id) {		
 		return new ResponseEntity<>(panelDetailsImpl.approve(id), HttpStatus.OK);
