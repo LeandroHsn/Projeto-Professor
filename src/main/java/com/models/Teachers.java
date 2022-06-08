@@ -72,4 +72,5 @@ public class Teachers {
 	
 	private Integer stars;
 	
+	private Integer verify;	
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.models.Teachers;
 import com.models.DTO.TeacherDTO;
+import com.models.filter.TeacherFilter;
 import com.services.TeacherDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,8 +41,17 @@ public class TeacherController {
 	}
 	
 	@GetMapping("/all")
-	public ResponseEntity<List<Teachers>> find() {		
-		return new ResponseEntity<>(teacherDetailsImpl.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Teachers>> find(
+            @RequestParam(value = "orderBy", required = false, defaultValue = "asc") String orderBy,
+            @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize)
+	
+	 {			
+		TeacherFilter teFilter = TeacherFilter.builder()
+				.orderBy(orderBy)
+				.build();
+		
+		return new ResponseEntity<>(teacherDetailsImpl.findAll(teFilter, pageNumber, pageSize), HttpStatus.OK);
 	}
 	
 	/**
@@ -54,6 +64,18 @@ public class TeacherController {
 	public ResponseEntity<Teachers> star (@PathVariable("id") Long id,
 			@RequestParam ("stars") Integer stars) {		
 		return new ResponseEntity<>(teacherDetailsImpl.updateStar(id, stars), HttpStatus.OK);
+		
+	}
+	
+	@PutMapping("/verified/{id}")
+	public ResponseEntity<Teachers> verify(@PathVariable("id") Long id) {		
+		return new ResponseEntity<>(teacherDetailsImpl.verified(id), HttpStatus.OK);
+		
+	}
+	
+	@PutMapping("/notverified/{id}")
+	public ResponseEntity<Teachers> notVerify(@PathVariable("id") Long id) {		
+		return new ResponseEntity<>(teacherDetailsImpl.notVerified(id), HttpStatus.OK);
 		
 	}
 }

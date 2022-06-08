@@ -8,11 +8,14 @@ import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.models.Panel;
 import com.models.Teachers;
 import com.models.DTO.TeacherDTO;
+import com.models.filter.TeacherFilter;
 import com.repository.PanelRepository;
 import com.repository.TeacherRepository;
 
@@ -42,6 +45,7 @@ public class TeacherDetailsImpl  {
 						.description(dto.getDescription())
 						.discipline(dto.getDisciplines())
 						.stars(0)
+						.verify(0)
 						.approved(0)
 						.build();
 				
@@ -139,13 +143,67 @@ public class TeacherDetailsImpl  {
 	}
 	
 	@Transactional
-	public List<Teachers> findAll() {		
-		try {			
-			List<Teachers> teachers = teacherRepository.findAll();
+	public List<Teachers> findAll(TeacherFilter teFilter, Integer pageNumber, Integer pageSize) {		
+		try {		
+			Pageable pageable;
+			List<Teachers> teachers;
+			
+			if (pageNumber != null && pageNumber > 0 && pageSize != null) {
+				pageable = PageRequest.of(pageNumber - 1, pageSize);
+				teachers = new ArrayList<>(teacherRepository.findAll(teFilter, pageable).getContent());
+
+			} else {
+				teachers = teacherRepository.findAll(teFilter);
+			}
+			
 			return teachers;
 		} catch (Exception e) {
 			throw new ValidationException("Erro: " + e.getMessage());
 		}				
 	}
-
+	
+	public Teachers verified(Long id) {
+		try {
+			
+			if(id == null) {
+				throw new ValidationException("ID não encontrado" );
+			}	
+			
+			Optional<Teachers> optional = teacherRepository.findById(id);
+			
+			if(!optional.isPresent()) {
+				throw new ValidationException("ID não encontrado" );
+			} 	
+			
+			Teachers teacher = optional.get();	
+						
+			teacher.setVerify(1);
+			return teacherRepository.save(teacher);
+			
+		} catch (Exception e) {
+			throw new ValidationException("Erro: " + e.getMessage());
+		}				
+	}
+	
+	public Teachers notVerified(Long id) {
+		try {			
+			if(id == null) {
+				throw new ValidationException("ID não encontrado" );
+			}	
+			
+			Optional<Teachers> optional = teacherRepository.findById(id);
+			
+			if(!optional.isPresent()) {
+				throw new ValidationException("ID não encontrado" );
+			} 	
+			
+			Teachers teacher = optional.get();	
+						
+			teacher.setVerify(0);
+			return teacherRepository.save(teacher);
+			
+		} catch (Exception e) {
+			throw new ValidationException("Erro: " + e.getMessage());
+		}				
+	}
 }
