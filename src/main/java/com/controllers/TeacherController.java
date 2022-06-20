@@ -60,9 +60,9 @@ public class TeacherController {
 	 * @param stars
 	 * @return Quantidade de estrelas
 	 */
-	@PutMapping("/star/{id}")
+	@PutMapping("/{stars}/{id}")
 	public ResponseEntity<Teachers> star (@PathVariable("id") Long id,
-			@RequestParam ("stars") Integer stars) {		
+			@PathVariable ("stars") Integer stars) {		
 		return new ResponseEntity<>(teacherDetailsImpl.updateStar(id, stars), HttpStatus.OK);
 		
 	}
