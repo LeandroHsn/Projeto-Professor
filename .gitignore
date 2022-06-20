@@ -32,3 +32,19 @@ build/
 
 ### VS Code ###
 .vscode/
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/main/**/resources/
+!**/src/test/**/resources/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
