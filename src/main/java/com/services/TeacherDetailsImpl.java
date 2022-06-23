@@ -147,6 +147,7 @@ public class TeacherDetailsImpl  {
 		try {		
 			Pageable pageable;
 			List<Teachers> teachers;
+			List<Teachers> teachersVeri = new ArrayList<Teachers>();
 			
 			if (pageNumber != null && pageNumber > 0 && pageSize != null) {
 				pageable = PageRequest.of(pageNumber - 1, pageSize);
@@ -156,7 +157,19 @@ public class TeacherDetailsImpl  {
 				teachers = teacherRepository.findAll(teFilter);
 			}
 			
-			return teachers;
+			for (Teachers teachersVerify : teachers) {
+				if (teachersVerify.getVerify() == 1) {
+					teachersVeri.add(teachersVerify);
+				}
+			}
+			
+			for (Teachers teachersVerify : teachers) {
+				if (teachersVerify.getVerify() == 0) {
+					teachersVeri.add(teachersVerify);
+				}
+			}
+			
+			return teachersVeri;
 		} catch (Exception e) {
 			throw new ValidationException("Erro: " + e.getMessage());
 		}				
