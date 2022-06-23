@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,16 +29,19 @@ public class PanelController {
 	 * @param id
 	 * @return Usuário aprovado ou não.
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/approve/{id}")
 	public ResponseEntity<Panel> approve (@PathVariable("id") Long  id) {		
 		return new ResponseEntity<>(panelDetailsImpl.approve(id), HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/disapprove/{id}")
 	public ResponseEntity<Panel> disapprove (@PathVariable("id") Long id) {		
 		return new ResponseEntity<>(panelDetailsImpl.disapprove(id), HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/all")
 	public ResponseEntity<List<Panel>> find() {		
 		return new ResponseEntity<>(panelDetailsImpl.findAll(), HttpStatus.OK);
