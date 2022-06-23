@@ -42,13 +42,15 @@ public class TeacherController {
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<Teachers>> find(
-            @RequestParam(value = "orderBy", required = false, defaultValue = "asc") String orderBy,
+            @RequestParam(value = "discipline", required = false) String discipline,
+            @RequestParam(value = "dayWeek", required = false) String dayWeek,
             @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", required = false) Integer pageSize)
 	
 	 {			
 		TeacherFilter teFilter = TeacherFilter.builder()
-				.orderBy(orderBy)
+				.dayWeek(dayWeek)
+				.discipline(discipline)
 				.build();
 		
 		return new ResponseEntity<>(teacherDetailsImpl.findAll(teFilter, pageNumber, pageSize), HttpStatus.OK);
